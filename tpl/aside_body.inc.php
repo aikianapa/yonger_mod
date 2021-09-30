@@ -6,4 +6,4 @@
         <span>создать сайт</span>
     </button>
 </div>
-<wb-include wb="{'src':'/modules/yonger/tpl/aside_menu.inc.php'}" />
+<wb-include wb="{'src':'aside_menu.inc.php'}" />

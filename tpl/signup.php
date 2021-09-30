@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<wb-var assets="/modules/yonger/tpl/assets" />
+<wb-var assets="/engine/modules/yonger/tpl/assets" />
 <wb-include wb-src="signhead.inc.php" />
 
 <body class="bg-light" id="signup">
@@ -8,25 +8,12 @@
     <div class="row">
         <div class="col-12 d-none d-sm-inline col-sm-6 col-lg-7 pr-0" id="image">
             <div class="d-flex">
-                <div class="container">
-                    <img src="/module/yonger/logo" class="position-absolute" style="top: 10vh; width: 150px;">
-                    <h1>
-                        Легко создавайте,
-                        <br />развивайте сайты
-                        <br />и онлайн-сервисы
-                    </h1>
-                    <p class="mt-5">
-                        Yonger - это мощное, многофункциональное ядро для разработки веб-приложений любой сложности. Мы
-                        подготовили все необходимое, чтобы вам было как можно комфортнее работать.
-                    </p>
-                    <a class="btn btn-secondary btn-rounded">Подробнее</a>
-                </div>
-
+                <wb-include wb-src="signleft.inc.php" />
             </div>
         </div>
         <div class="col-12 col-sm-6 col-lg-5" id="form">
             <div class="container">
-            <div class="row mt-5">
+                <div class="row mt-5">
                     <div class="col-12 col-md-6 offset-md-4 offset-xl-5">
                         <p>Уже зарегистрированы?</p>
                         <h4><a href="/signin">Войти</a></h4>
@@ -48,15 +35,17 @@
                                 </a>
                                 <label class="form-control-label after-send-code d-none">Проверочный код</label>
                                 <input type="text" placeholder="Проверочный код" wb-mask='999-999'
-                                        class="form-control after-send-code d-none" name="code">
-                                <a href="/workspace" class="btn btn-primary d-none after-reg mt-4 w-100">Войти в систему</a>
+                                    class="form-control after-send-code d-none" name="code">
+                                <a href="/workspace" class="btn btn-primary d-none after-reg mt-4 w-100">Войти в
+                                    систему</a>
                             </div>
                             <div class="col-12 after-send-code d-none tx-secondary pt-3">
                                 Мы отправили код подтверждения<br>
                                 на номер <phone></phone><br>
                                 <a href="#" class="d-none btn-repeat">Отправить код ещё раз</a>
                                 <br>
-                                <span class="msg-repeat">Повторная отправка возможна через <span class='wait'></span> секунд</span>
+                                <span class="msg-repeat">Повторная отправка возможна через <span class='wait'></span>
+                                    секунд</span>
                                 <a href="#" onclick="wbapp.sign.reg();"
                                     class="btn btn-secondary mt-5 w-100">Зарегистрироваться</a>
                             </div>

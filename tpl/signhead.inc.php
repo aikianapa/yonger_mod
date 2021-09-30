@@ -8,11 +8,19 @@
     <title>{{header}}</title>
     <link rel="stylesheet" href="{{_var.assets}}/css/dashforge.css">
 </head>
-<script type="wbapp">
+
+<script wb-app remove>
         wbapp.loadScripts([
             "/engine/lib/bootstrap/js/bootstrap.bundle.min.js"
         ]);
-        wbapp.sign = {
+        let login;
+        try {
+            login = wbapp._settings.modules.login.loginby;
+        } catch (error) {
+            login = 'email';
+        }
+
+        let sign_phone = {
             checkphone: function(type = 'reg') {
                 if (!$('#form').verify()) return;
                 let $phone = $('#form input[name=phone]');
@@ -79,30 +87,63 @@
                         }
                     });
             }
-        };
+        }
+
+        let sign_email = {
+            login: function() {
+                wbapp.post('/ajax/auth/email',{
+                        'login':$('#form [name=email]').val(),
+                        'password':$('#form [name=password]').val()
+                    },function(data){
+                        if (data.login == true && data.error == false) {
+                            document.location.href = data.user.group.url_login;
+                        } else {
+                            $('#form .tx-danger').text(data.msg).removeClass('d-none');
+                        }
+                    });
+            },
+            reg: function() {
+
+            }
+        }
+
+        switch (login) {
+            case 'phone':
+                wbapp.sign = sign_phone;
+                break;
+            default:
+                wbapp.sign = sign_email;
+                break;
+        }
+
+        
+        
         $(document).on('wb-verify-false',function(e,input){
             $(input).addClass('is-invalid').removeClass('is-valid');
         })
 
         $(document).on('wb-verify-true',function(e,input){
             $(input).addClass('is-valid').removeClass('is-invalid');
-        })
+        });
+
     </script>
 
+<wb-var bkg="/modules/yonger/tpl/assets/img/signup_bg.jpg" wb-if="'{{_sett.modules.login.background.0.img}}'==''" else="{{_sett.modules.login.background.0.img}}" />
+<wb-var blur="0" wb-if="'{{_sett.modules.login.blur}}'==''" else="{{_sett.modules.login.blur}}" />
 <style wb-module="scss">
 #signup {
     font-family: sans;
     width: 100vw;
     overflow: hidden;
-    
-    .btn-rounded {
-        border-radius: 100px;
-    }
 
     #image {
-        background: url(/modules/yonger/tpl/assets/img/signup_bg.jpg) 50% 0%;
+        background: url({{_var.bkg}}) 50% 0%;
         background-size: cover;
         height: 100vh;
+
+        > :first-child {
+            backdrop-filter: blur({{_var.blur}}px);
+        }
 
         .d-flex {
             height: 100vh;
@@ -111,11 +152,9 @@
         }
 
         h1 {
-            margin-top: 15vh;
+            margin-top: 10vh;
             font-style: normal;
             font-weight: bold;
-            font-size: 48px;
-            line-height: 58px;
             color: #FFFFFF;
             width: 70%;
         }
@@ -139,7 +178,6 @@
             padding: 24px 53px;
             width: 207px;
             height: 60px;
-            background: #FFFFFF;
         }
     }
 

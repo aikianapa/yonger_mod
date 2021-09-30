@@ -112,6 +112,7 @@ body {
     }
 */
     .modal {
+        padding:0;
         .modal-content {
             border-radius: @radius;
         }
@@ -127,6 +128,15 @@ body {
         }
         .modal-footer {
             border-top: 0;
+        }
+        .modal-dialog {
+            &.modal-xxl {
+                margin:0!important;
+                .modal-content {
+                    width: 100vw;
+                    height: 100vh;
+                }
+            }
         }
         &.contain {
             .modal-dialog {

@@ -1,5 +1,5 @@
 <html>
-<wb-var base="/modules/yonger/tpl/" />
+<wb-var base="/engine/modules/yonger/tpl/" />
   <head>
 
     <!-- Required meta tags -->

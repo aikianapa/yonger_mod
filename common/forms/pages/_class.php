@@ -6,14 +6,16 @@ class pagesClass extends cmsFormsClass {
 function beforeItemShow(&$item) {
     isset($item['lang']) ? $lang = $item['lang'][$this->app->vars('_sess.lang')] : $lang = [];
     $item = (array)$lang + (array)$item;
-    isset($item['header']) ? $item['header'] = $item['header'][$_SESSION['lang']] : null;
+    isset($item['header'])  AND isset($item['header'][$_SESSION['lang']]) ? $item['header'] = $item['header'][$_SESSION['lang']] : null;
 }
 
 function afterItemRead(&$item) {
     isset($item['blocks']) ? null : $item['blocks'] = [];
     isset($item['container']) ? null : $item['container'] = '';
     if (in_array($item['id'],['_header','_footer'])) return;
+    if ($item['name'] == '') $item['name'] = $item['id'];
     if ($item['path'] == '/') $item['path'] = '';
+    if (isset($item['blocks'])) $item['template'] = '';
     $item['url'] = $item['path'] . '/' .$item['name'];
     $item['url'] == '/home' ? $item['url'] = '/' : null;
 }

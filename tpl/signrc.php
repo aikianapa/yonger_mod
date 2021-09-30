@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <wb-var assets="/modules/yonger/tpl/assets" />
-<wb-include wb-tpl="head.inc.php" />
+<wb-include src="head.inc.php" />
 
 <body class="bg-light">
 
 
-    <wb-include wb-tpl="signhead.inc.php" />
+    <wb-include wb-src="signhead.inc.php" />
 
     <div class="content content-fixed content-auth">
         <div class="container">

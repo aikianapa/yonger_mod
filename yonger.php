@@ -59,6 +59,7 @@ class modYonger
                 return $form->get404();
             } else if ($login == '_new') {
                 $master = $ws = $app->fromFile(__DIR__."/tpl/master.php", true);
+                $master->path = $ws->path = __DIR__ . '/tpl/';
                 $master->fetch();
                 return $master;
             }
@@ -69,6 +70,7 @@ class modYonger
             symlink(__DIR__ .'/common/tpl/page.php' , $app->vars('_env.path_app').'/tpl/page.php' );
         }
         $ws = $app->fromFile(__DIR__."/tpl/workspace.php", true);
+        $ws->path = __DIR__ . '/tpl/';
         $ws->fetch();
         return $ws;
     }
@@ -105,7 +107,9 @@ class modYonger
         }
         isset($item['lang']) ? $data = array_merge($item,$item['lang'][$this->app->vars('_sess.lang')]) : $data = &$item;
         $result = (object)$res->attributes();
+        $res->fetch($data); // не удалять, иначе слюстрока не работает как нужно... шайтанама! :(
         $section = $this->dom->app->fromString($res->fetch($data)->inner());
+
         isset($item['block_id']) && $item['block_id'] ? $section->children(':first-child')->attr('id',$item['block_id']) : null;
         isset($item['block_class']) && $item['block_class'] ? $section->children(':first-child')->addClass($item['block_class']) : null;
         $result->result = $section;
@@ -164,10 +168,10 @@ class modYonger
         $form = $this->app->route->path_app . '/tpl/signin.php';
         if (is_file($form)) {
             $form = $this->app->fromFile($form);
-            $form->path = __DIR__ . '/tpl/';
         } else {
             $form = $this->app->fromFile(__DIR__ . '/tpl/signin.php');
         }
+        $form->path = __DIR__ . '/tpl/';
         return $form->fetch();
     }
 
@@ -175,10 +179,10 @@ class modYonger
         $form = $this->app->route->path_app . '/tpl/signup.php';
         if (is_file($form)) {
             $form = $this->app->fromFile($form);
-            $form->path = __DIR__ . '/tpl/';
         } else {
             $form = $this->app->fromFile(__DIR__ . '/tpl/signup.php');
         }
+        $form->path = __DIR__ . '/tpl/';
         return $form->fetch();
     }
 
@@ -186,10 +190,10 @@ class modYonger
         $form = $this->app->route->path_app . '/tpl/signrc.php';
         if (is_file($form)) {
             $form = $this->app->fromFile($form);
-            $form->path = __DIR__ . '/tpl/';
         } else {
             $form = $this->app->fromFile(__DIR__ . '/tpl/signrc.php');
         }
+        $form->path = __DIR__ . '/tpl/';
         return $form->fetch();
     }
 
@@ -197,10 +201,10 @@ class modYonger
         $form = $this->app->route->path_app . '/tpl/support.php';
         if (is_file($form)) {
             $form = $this->app->fromFile($form);
-            $form->path = __DIR__ . '/tpl/';
         } else {
             $form = $this->app->fromFile(__DIR__ . '/tpl/support.php');
         }
+        $form->path = __DIR__ . '/tpl/';
         return $form->fetch();
     }
 

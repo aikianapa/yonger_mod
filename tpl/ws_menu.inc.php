@@ -1,43 +1,20 @@
 <wb-var auto="auto" wb-if='"{{_route.subdomain}}" == ""' />
-<nav class="nav nav__list d-flex align-items-center">
-    <a href="#sites" class="nav-link nav__item d-flex align-items-center mg-r-10"
-        data-ajax="{'url':'/module/yonger/listSites','html':'.content-body'}" _var.auto>
+<nav class="nav nav__list d-flex align-items-center" wb-tree="from=_sett.cmsmenu.data&branch=top&parent=false">
+    <wb-var allow="on" wb-if='"{{data.allow}}" == "" OR {{in_array({{_sess.user.role}},{{explode(",",{{data.allow}})}})*1}}' else="" />
+    <a href="javascript:void(0);" data-ajax="{{data.ajax}}" class="nav-link nobr d-flex align-items-center mg-r-10"
+        wb-if='"{{_lvl}}"=="1" && "{{active}}"=="on" AND "{{_var.allow}}"=="on"'
+        data-ajax="{'url':'/module/yonger/listSites','html':'.content-body'}">
         <div class="nav__icon d-flex align-items-center justify-content-center">
-            <svg class="mi mi-cursor.1" wb-module="myicons">
+            <svg wb-if="'{{data.icon}}'>''" class="mi mi-{{data.icon}}" wb-module="myicons"></svg>
             </svg>
         </div>
-        <span class='d-none d-lg-inline'>Сайты</span>
-    </a>
-    <a href="#projects" class="nav-link nav__item d-flex align-items-center mg-r-10">
-        <div class="nav__icon d-flex align-items-center justify-content-center">
-            <svg class="mi mi-checkmark-sqaure.1" wb-module="myicons">
-            </svg>
-        </div>
-        <span class='d-none d-lg-inline'>Проекты</span>
-    </a>
-    <a href="#docs" class="nav-link nav__item d-flex align-items-center mg-r-10">
-        <div class="nav__icon d-flex align-items-center justify-content-center">
-            <svg class="mi mi-document-content" wb-module="myicons">
-            </svg>
-        </div>
-        <span class='d-none d-lg-inline'>Документы</span>
-    </a>
-    <a href="#contacts" class="nav-link nav__item d-flex align-items-center mg-r-10">
-        <div class="nav__icon d-flex align-items-center justify-content-center">
-            <svg class="mi mi-user-square" wb-module="myicons">
-            </svg>
-        </div>
-        <span class='d-none d-lg-inline'>Контакты</span>
-    </a>
-    <a href="#services" data-ajax="{'url':'/cms/ajax/form/_settings/start','html':'.content-body'}"
-        class="nav-link btn btn-sm btn-dashed nobr d-flex align-items-center mg-r-10">
-        <div class="d-flex align-items-center justify-content-center">
-            <svg class="mi mi-grid-layout-add" wb-module="myicons">
-            </svg>
-        </div>
-        <span class="mg-l-10 d-none d-md-inline">Все сервисы</span>
+        <span class='d-none d-lg-inline'>{{data.label}}</span>
     </a>
 </nav>
+
+<meta wb-jq='$dom->prev()->find(".nav-link:last-child")->addClass("btn btn-sm btn-dashed");' />
+
+
 <nav class="nav d-flex align-items-center">
     <a href="#" class="nav-link">
         <svg class="mi mi-search-loap" wb-module="myicons"></svg>

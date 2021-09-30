@@ -1,7 +1,7 @@
 <html>
 <div class="modal effect-scale show removable" id="modalPagesEdit" data-backdrop="static" tabindex="-1"
     role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-xxl" role="document">
         <div class="modal-content">
             <div class="modal-header row">
                 <div class="col-5">
@@ -97,7 +97,7 @@
                 <i class="fa fa-close cursor-pointer" data-dismiss="modal"
                     aria-label="Close"></i>
             </div>
-            <div class="modal-body p-0 scroll-y">
+            <div class="modal-body p-0 pb-5 scroll-y">
             <div class="list-group">
                 <wb-foreach wb="ajax=/module/yonger/blocklist&render=client&bind=yonger.blocks">
                     <a class="list-group-item list-group-item-action" href="#" data-name="{{name}}"

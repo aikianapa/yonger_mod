@@ -1,5 +1,4 @@
 "use strict"
-
 var yonger = {};
 
 $(document).delegate(".nav-link:not([data-toggle=tab])", "tap click",function() {
@@ -91,23 +90,25 @@ yonger.workspace = function() {
 };
 
 yonger.plugins = function(){
-    $(document).find('.modal-body').addClass('scroll-y');
-    
-    $('.scroll-x').each(function(){
-        if (this.done) return;
-        this.done = true;
-        new PerfectScrollbar(this, {suppressScrollY: true});
-    });
-    $('.scroll-y').each(function(){
-        if (this.done) return;
-        this.done = true;
-        new PerfectScrollbar(this, {suppressScrollX: true});
-    });
-    $('.scroll').each(function(){
-        if (this.done) return;
-        this.done = true;
-        new PerfectScrollbar(this, {suppressScrollY: false,suppressScrollX: false});
-    });
+    setTimeout(function(){
+        $(document).find('.modal-body').addClass('scroll-y');
+        
+        $('.scroll-x').each(function(){
+            if (this.done) return;
+            this.done = true;
+            new PerfectScrollbar(this, {suppressScrollY: true});
+        });
+        $('.scroll-y').each(function(){
+            if (this.done) return;
+            this.done = true;
+            new PerfectScrollbar(this, {suppressScrollX: true});
+        });
+        $('.scroll').each(function(){
+            if (this.done) return;
+            this.done = true;
+            new PerfectScrollbar(this, {suppressScrollY: false,suppressScrollX: false});
+        });
+    },100)
 }
 
 yonger.siteCreator = function(){
