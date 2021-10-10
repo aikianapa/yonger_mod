@@ -13,6 +13,8 @@ function afterItemRead(&$item) {
     isset($item['blocks']) ? null : $item['blocks'] = [];
     isset($item['container']) ? null : $item['container'] = '';
     if (in_array($item['id'],['_header','_footer'])) return;
+    isset($item['name']) ? null : $item['name'] = '';
+    isset($item['path']) ? null : $item['path'] = '';
     if ($item['name'] == '') $item['name'] = $item['id'];
     if ($item['path'] == '/') $item['path'] = '';
     if (isset($item['blocks'])) $item['template'] = '';

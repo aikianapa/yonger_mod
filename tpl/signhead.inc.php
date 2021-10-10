@@ -6,6 +6,7 @@
     <link rel="shortcut icon" type="image/svg+xml" href="/tpl/assets/img/favicon.svg">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <title>{{header}}</title>
+    <link rel="stylesheet" href="{{_var.assets}}/css/sign.scss">
     <link rel="stylesheet" href="{{_var.assets}}/css/dashforge.css">
 </head>
 
@@ -130,102 +131,3 @@
 
 <wb-var bkg="/modules/yonger/tpl/assets/img/signup_bg.jpg" wb-if="'{{_sett.modules.login.background.0.img}}'==''" else="{{_sett.modules.login.background.0.img}}" />
 <wb-var blur="0" wb-if="'{{_sett.modules.login.blur}}'==''" else="{{_sett.modules.login.blur}}" />
-<style wb-module="scss">
-    
-#signup {
-    font-family: sans;
-    width: 100vw;
-    overflow: hidden;
-
-    #image {
-        background: url({{_var.bkg}}) 50% 0%;
-        background-size: cover;
-        height: 100vh;
-
-        > :first-child {
-            backdrop-filter: blur({{_var.blur}}px);
-        }
-
-        .d-flex {
-            height: 100vh;
-            align-items: center;
-            background: #161C2799;
-        }
-
-        h1 {
-            margin-top: 10vh;
-            font-style: normal;
-            font-weight: bold;
-            color: #FFFFFF;
-            width: 70%;
-        }
-
-        p {
-            width: 70%;
-            font-weight: 500;
-            font-size: 18px;
-            line-height: 26px;
-            letter-spacing: 0.1px;
-            color: white;
-        }
-
-        .btn {
-            position: absolute;
-            bottom: 5vh;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            padding: 24px 53px;
-            width: 207px;
-            height: 60px;
-        }
-    }
-
-    #form {
-        align-items: center;
-        h2 {
-            font-size: 30px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 36px;
-            letter-spacing: -0.4px;
-            text-align: left;
-            color: #171717;
-        }
-        label {
-            font-family: Roboto;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 16px;
-            letter-spacing: 0.1px;
-            text-align: left;
-            color: #50B5FF;
-            &.is-invalid {
-                color: var(--danger);
-            }
-        }
-        input.form-control {
-            font-family: Roboto;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 19px;
-            letter-spacing: 0.1px;
-            text-align: left;
-            border: 0;
-            border-radius: 0;
-            border-bottom: 1px #50B5FF solid;
-            background: transparent;
-            &.is-invalid {
-                border-bottom: 1px var(--danger) solid;
-            }
-        }
-        .d-flex {
-            height: 80vh;
-            align-items: center;
-        }
-    }
-}
-</style>
