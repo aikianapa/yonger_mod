@@ -131,6 +131,7 @@
 <wb-var bkg="/modules/yonger/tpl/assets/img/signup_bg.jpg" wb-if="'{{_sett.modules.login.background.0.img}}'==''" else="{{_sett.modules.login.background.0.img}}" />
 <wb-var blur="0" wb-if="'{{_sett.modules.login.blur}}'==''" else="{{_sett.modules.login.blur}}" />
 <style wb-module="scss">
+    
 #signup {
     font-family: sans;
     width: 100vw;

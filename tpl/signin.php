@@ -5,16 +5,17 @@
 
 <body class="bg-light" id="signup">
     <div class="row h-100">
-        <div class="col-12 d-none d-sm-inline col-sm-6 col-lg-7 pr-0" id="image">
+        <div class="col-12 d-none d-sm-flex col-sm-6 col-lg-7 pr-0" id="image">
             <div class="d-flex align-items-center">
                 <wb-include wb-src="signleft.inc.php" />
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-lg-5" id="form">
+        <div class="col-12 d-flex col-sm-6 col-lg-5" id="form">
+            <div class="d-flex align-items-center">
             <div class="container">
                 <div class="row mt-5">
-                    <div class="col-12 col-md-6 offset-md-4 offset-xl-5">
-                        <p class="">Ещё нет аккаунта?</p>
+                    <div class="col-12 tx-right">
+                        <p>Ещё нет аккаунта?</p>
                         <h4><a href="/signup">Зарегистрироваться</a></h4>
                     </div>
                 </div>
@@ -64,15 +65,10 @@
                             </div>
                         </div>
                         <p class="mt-5 tx-12">
-                            *Бесплатное использование по плану Free рассчитывается ежедневно. Детали немного отличаются
-                            для
-                            облачных функций, Firebase ML, Phone Auth и Test Lab.
-                            <br><br>
-                            Дополнительные сведения см. в разделе
-                            <a href="/faq">Часто задаваемые вопросы</a>
                         </p>
                     </form>
                 </div>
+            </div>
             </div>
         </div>
     </div>
