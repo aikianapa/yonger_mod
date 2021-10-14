@@ -49,7 +49,7 @@ class yongerPage {
 
     function blockfind($name) {
         $ta = $this->app->route->path_app."/blocks/{$name}.php";
-        $ty = $this->app->route->path_app."/modules/yonger/common/blocks/{$name}.php";
+        $ty = __DIR__."/common/blocks/{$name}.php";
         is_file($ta) && !isset($file) ? $file = $ta : null;
         is_file($ty) && !isset($file) ? $file = $ty : null;
         if (!isset($file)) $file = null;

@@ -11,7 +11,7 @@
     [ru]
     header = "Вставка кода"
     [en]
-    header = "Append code"
+    header = "Insert code"
 </wb-lang>
 </edit>
 </html>
