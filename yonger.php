@@ -145,15 +145,18 @@ class modYonger
 
 
         foreach($blocks as $id => $block) {
-            isset($block['active']) ? null : $block['active'] = '';
-            if ($block['active'] == 'on') {
-                $block['_parent'] = $app->objToArray($item);
-                $res = $this->blockview($block);
-                if (isset($res->head)) {
-                    $head->append($res->result);
-                } else {
-
-                    $dom->parent()->append($res->result);
+            if ($block === (array)$block) {
+                isset($block['active']) ? null : $block['active'] = '';
+                $dom->params('view') == 'header' ? $method = 'prepend' : $method = 'append';
+                if ($block['active'] == 'on') {
+                    $block['_parent'] = $app->objToArray($item);
+                    $res = $this->blockview($block);
+                    if (isset($res->head)) {
+                                                echo $block['name']."{$method} <br>";
+                        $head->$method($res->result);
+                    } else {
+                        $body->$method($res->result);
+                    }
                 }
             }
         }

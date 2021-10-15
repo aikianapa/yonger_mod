@@ -9,9 +9,9 @@
     <wb-module wb="module=codemirror&oconv=html_entity_decode" name="freecode"></wb-module>
     <wb-lang>
     [ru]
-    header = "Произвольный код"
+    header = "Произвольный код в body"
     [en]
-    header = "Free code"
+    header = "Free code in body"
 </wb-lang>
 </edit>
 </html>
