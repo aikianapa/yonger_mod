@@ -145,6 +145,7 @@ class modYonger
 
 
         foreach($blocks as $id => $block) {
+            isset($block['active']) ? null : $block['active'] = '';
             if ($block['active'] == 'on') {
                 $block['_parent'] = $app->objToArray($item);
                 $res = $this->blockview($block);

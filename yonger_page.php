@@ -63,9 +63,9 @@ class yongerPage {
         strpos(' '.$file, '_app_') ? $file = str_replace('/_app_',$this->app->route->path_app, $file) : null;
         is_file($file) ? null : $file = __DIR__ .'/common/blocks/'.$file;
         $out = $this->app->fromFile($file);
+        $out->path = dirname($file);
         $out->fetch($item);
         $out = $out->find('edit');
-        $out->path = dirname($file);
         return $out->outer();
 
     }

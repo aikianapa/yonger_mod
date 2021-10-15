@@ -12,6 +12,7 @@ function beforeItemShow(&$item) {
 function afterItemRead(&$item) {
     isset($item['blocks']) ? null : $item['blocks'] = [];
     isset($item['container']) ? null : $item['container'] = '';
+    isset($item['id']) ? null : $item['id'] = '_new';
     if (in_array($item['id'],['_header','_footer'])) return;
     isset($item['name']) ? null : $item['name'] = '';
     isset($item['path']) ? null : $item['path'] = '';

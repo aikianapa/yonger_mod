@@ -128,7 +128,7 @@
 
     </script>
 
-<wb-var bkg="/modules/yonger/tpl/assets/img/signup_bg.jpg" wb-if="'{{_sett.modules.login.background.0.img}}'==''" else="{{_sett.modules.login.background.0.img}}" />
+<wb-var bkg="/engine/modules/yonger/tpl/assets/img/signup_bg.jpg" wb-if="'{{_sett.modules.login.background.0.img}}'==''" else="{{_sett.modules.login.background.0.img}}" />
 <wb-var blur="0" wb-if="'{{_sett.modules.login.blur}}'=='0'" else="{{_sett.modules.login.blur}}" />
 
 <style wb-module="scss">
