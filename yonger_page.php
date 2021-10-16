@@ -83,8 +83,23 @@ class yongerPage {
             $out = $out->find('view');
         }
         return $out;
-
     }
+
+    function blockedit($file = null) {
+        if ($file == null) return;
+        $src = $file;
+        strpos(' '.$file,'_yonger_') ? $file = str_replace('/_yonger_',__DIR__,$file) : null;
+        strpos(' '.$file, '_app_') ? $file = str_replace('/_app_',$this->app->route->path_app, $file) : null;
+        !is_file($file) ? $file = __DIR__ . '/common/blocks/'.$file : null; // если не прописане полный путь
+        if (!is_file($file)) {
+            $out = $this->app->fromString("<span><!-- Block not found: {$src} --></span>");
+        } else {
+            $out = $this->app->fromFile($file);
+            $out = $out->find('edit');
+        }
+        return $out;
+    }
+
 
 }
 ?>

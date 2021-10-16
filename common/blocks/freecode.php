@@ -4,7 +4,7 @@
 </view>
 <edit header="{{_lang.header}}">
     <div>
-        <wb-include wb-src="common.inc.php" />
+        <wb-module wb="module=yonger&mode=edit&block=common.inc" />
     </div>
     <wb-module wb="module=codemirror&oconv=html_entity_decode" name="freecode"></wb-module>
     <wb-lang>

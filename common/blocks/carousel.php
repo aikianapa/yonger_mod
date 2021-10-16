@@ -34,7 +34,7 @@
 </view>
 <edit header="{{_lang.carousel}} BS4">
     <div>
-        <wb-include wb-src="common.inc.php" />
+        <wb-module wb="module=yonger&mode=edit&block=common.inc" />
     </div>
     <div>
         <wb-multilang wb-lang="{{_sett.locales}}" name="lang">

@@ -102,25 +102,42 @@ class modYonger
         $form = $item['form'];
         $ypg = new yongerPage($this->dom);
         $res = $ypg->blockview($form);
-        if (isset($item['container']) && $item['container'] == 'on') {
-            $res->children()->addClass('container');
+        if (!$res) {
+            $result = (object)[];
+            $result->result = $this->dom->app->fromString('<!-- Form '.$form.' not found -->');
+            return $result;
         }
+        (isset($item['container']) && $item['container'] == 'on') ? $res->children()->addClass('container') : null;
         isset($item['lang']) ? $data = array_merge($item,$item['lang'][$this->app->vars('_sess.lang')]) : $data = &$item;
         $result = (object)$res->attributes();
         $res->fetch($data); // не удалять, иначе слюстрока не работает как нужно... шайтанама! :(
         $section = $this->dom->app->fromString($res->fetch($data)->inner());
-
+        //$section->prepend('<!-- Form '.$form.' included -->');
         isset($item['block_id']) && $item['block_id'] ? $section->children(':first-child')->attr('id',$item['block_id']) : null;
         isset($item['block_class']) && $item['block_class'] ? $section->children(':first-child')->addClass($item['block_class']) : null;
         $result->result = $section;
         return $result;
     }
 
+
+    private function edit() {
+        $dom = &$this->dom;
+        $app = &$dom->app;
+        $ypg = new yongerPage($this->dom);
+        $form = $ypg->blockfind($dom->params('block'));
+        $out = $ypg->blockedit($form);
+        if ($out) {
+            $out->fetch($dom->item);
+            $dom->append($out);
+        }
+
+    }
+
+
     private function render() {
         $dom = &$this->dom;
         $app = &$dom->app;
         $item = null;
-
         $dom->params('view') == 'header' ? $item = $app->itemRead('pages','_header') : null;
         $dom->params('view') == 'footer' ? $item = $app->itemRead('pages','_footer') : null;
         if ($item === null && $dom->params('view') > '') {
@@ -133,7 +150,6 @@ class modYonger
         } else if ($item === null) {
             $item = $dom->item;
         }
-
         isset($item['blocks']) ? $blocks = (array)$item['blocks'] : $item['blocks'] = []; 
         $blocks = (array)$item['blocks'];
         $blocks = wbItemToArray($blocks);
@@ -143,7 +159,6 @@ class modYonger
         $head = $html->find('head');
         $body = $html->find('body');
 
-
         foreach($blocks as $id => $block) {
             if ($block === (array)$block) {
                 isset($block['active']) ? null : $block['active'] = '';
@@ -152,15 +167,15 @@ class modYonger
                     $block['_parent'] = $app->objToArray($item);
                     $res = $this->blockview($block);
                     if (isset($res->head)) {
-                                                echo $block['name']."{$method} <br>";
                         $head->$method($res->result);
-                    } else {
+                    } else if (isset($res->body)) {
                         $body->$method($res->result);
+                    } else {
+                        $dom->$method($res->result);
                     }
                 }
             }
         }
-
     }
 
     private function logo() {

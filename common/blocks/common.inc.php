@@ -1,3 +1,4 @@
+<edit>
 <div class="pr-4 yonger-block-common">
     <div class="row">
         <div class="col-lg-6">
@@ -75,3 +76,4 @@
     container = "В контейнере"
     template = Шаблон
 </wb-lang>
+</edit>
