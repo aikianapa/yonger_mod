@@ -103,7 +103,7 @@ class modYonger
         $ypg = new yongerPage($this->dom);
         $res = $ypg->blockview($form);
         if (!$res) {
-            $result = (object)[];
+            $result = (object)['head'=>false, 'body'=>false, 'result'=>null];
             $result->result = $this->dom->app->fromString('<!-- Form '.$form.' not found -->');
             return $result;
         }
@@ -111,10 +111,18 @@ class modYonger
         isset($item['lang']) ? $data = array_merge($item,$item['lang'][$this->app->vars('_sess.lang')]) : $data = &$item;
         $result = (object)$res->attributes();
         $res->fetch($data); // не удалять, иначе слюстрока не работает как нужно... шайтанама! :(
-        $section = $this->dom->app->fromString($res->fetch($data)->inner());
+        $section = $this->dom->app->fromString('<html>'.$res->fetch($data)->inner().'</html>');
         //$section->prepend('<!-- Form '.$form.' included -->');
         isset($item['block_id']) && $item['block_id'] ? $section->children(':first-child')->attr('id',$item['block_id']) : null;
         isset($item['block_class']) && $item['block_class'] ? $section->children(':first-child')->addClass($item['block_class']) : null;
+        if ($section->find('head')) {
+            $result->head = $section->find('head');
+            $section->find('head')->remove();
+        }
+        if ($section->find('body')) {
+            $result->body = $section->find('body');
+            $section->find('body')->remove();
+        }
         $result->result = $section;
         return $result;
     }
@@ -156,6 +164,7 @@ class modYonger
         $html = $dom->parents(':root');
         $html->find('head')->length ? null : $html->prepend('<head></head>');
         $html->find('body')->length ? null : $html->prepend('<body></body>');
+
         $head = $html->find('head');
         $body = $html->find('body');
 
@@ -166,13 +175,9 @@ class modYonger
                 if ($block['active'] == 'on') {
                     $block['_parent'] = $app->objToArray($item);
                     $res = $this->blockview($block);
-                    if (isset($res->head)) {
-                        $head->$method($res->result);
-                    } else if (isset($res->body)) {
-                        $body->$method($res->result);
-                    } else {
-                        $dom->$method($res->result);
-                    }
+                    $head && isset($res->head) ? $head->$method($res->head) : null;
+                    $body && isset($res->body) ? $body->$method($res->body) : null;
+                    $dom->$method($res->result);
                 }
             }
         }

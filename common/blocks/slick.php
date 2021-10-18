@@ -30,10 +30,10 @@
             </div>
 
         <script wb-app remove>
-        wbapp.loadStyles(["/modules/yonger/common/blocks/assets/slick/slick.min.css",
-            "/modules/yonger/common/blocks/assets/slick/slick-theme.css"
+        wbapp.loadStyles(["/engine/modules/yonger/common/blocks/assets/slick/slick.min.css",
+            "/engine/modules/yonger/common/blocks/assets/slick/slick-theme.css"
         ]);
-        wbapp.loadScripts(["/modules/yonger/common/blocks/assets/slick/slick.min.js"], "slick-js", function() {
+        wbapp.loadScripts(["/engine/modules/yonger/common/blocks/assets/slick/slick.min.js"], "slick-js", function() {
             let options = {
                 infinite: true,
                 lazyLoad: 'ondemand',
