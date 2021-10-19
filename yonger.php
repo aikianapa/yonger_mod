@@ -113,8 +113,8 @@ class modYonger
         $res->fetch($data); // не удалять, иначе слюстрока не работает как нужно... шайтанама! :(
         $section = $this->dom->app->fromString('<html>'.$res->fetch($data)->inner().'</html>');
         //$section->prepend('<!-- Form '.$form.' included -->');
-        isset($item['block_id']) && $item['block_id'] ? $section->children(':first-child')->attr('id',$item['block_id']) : null;
-        isset($item['block_class']) && $item['block_class'] ? $section->children(':first-child')->addClass($item['block_class']) : null;
+        isset($item['block_id']) && $item['block_id'] ? $section->children()->children(':first-child')->attr('id',$item['block_id']) : null;
+        isset($item['block_class']) && $item['block_class'] ? $section->children()->children(':first-child')->addClass($item['block_class']) : null;
         if ($section->find('head')) {
             $result->head = $section->find('head');
             $section->find('head')->remove();
