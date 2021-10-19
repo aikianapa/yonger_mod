@@ -25,7 +25,7 @@
     <a href="#" data-toggle="dropdown" class="dropdown-link ml-4">
         <div class="d-flex align-items-center">
             <div class="avatar avatar-sm mg-r-8">
-                <img data-src="/thumb/36x36/src/{{_sess.user.avatar[0].img}}" class="img rounded-circle" alt="" />
+                <img data-src="/thumb/36x36/src{{_sess.user.avatar[0].img}}" class="img rounded-circle" alt="" />
             </div>
             <div>
             <span class="tx-color-01 tx-semibold d-block lh--9">{{_sess.user.first_name}}</span>
@@ -35,8 +35,8 @@
         </div>
     </a>
     <div class="dropdown-menu dropdown-menu-right tx-13">
-        <a href="/workspace/profile" class="dropdown-item">
-        <svg class="mi mi-user-circle.1" wb-module="myicons"></svg> Профиль
+        <a data-ajax="{'url':'/cms/ajax/form/users/profile','html':'.content-body'}" class="dropdown-item">
+        <svg class="mi mi-users-06" wb-module="myicons"></svg> Профиль
         </a>
         <div class="dropdown-divider"></div>
         <a href="/signout" class="dropdown-item">
