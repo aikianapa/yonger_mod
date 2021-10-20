@@ -184,8 +184,20 @@ class modYonger
     }
 
     private function logo() {
-        header( 'Content-type: image/svg+xml' ); 
-        return file_get_contents(__DIR__. '/tpl/assets/img/logo.svg');
+        $aLogo = $this->app->route->path_app . '/tpl/assets/img/logo.svg';
+        $sLogo = $this->app->route->path_app . $this->app->vars('_sett.logo.0.img');
+        $eLogo = __DIR__. '/tpl/assets/img/logo.svg';
+        if (is_file($aLogo)) {
+            header('Content-type: image/svg+xml');
+            return file_get_contents($aLogo);
+        } else if (is_file($sLogo)) {
+            header('Content-type: '.wbMime($sLogo));
+            return file_get_contents($sLogo);
+        } else {
+            header('Content-type: image/svg+xml');
+            return file_get_contents($eLogo);
+        }
+        die;
     }
 
     private function signin() {
