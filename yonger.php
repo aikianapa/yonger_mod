@@ -171,7 +171,8 @@ class modYonger
         foreach($blocks as $id => $block) {
             if ($block === (array)$block) {
                 isset($block['active']) ? null : $block['active'] = '';
-                $dom->params('view') == 'header' ? $method = 'prepend' : $method = 'append';
+                //$dom->params('view') == 'header' ? $method = 'prepend' : $method = 'append';
+                $method = 'append';
                 if ($block['active'] == 'on') {
                     $block['_parent'] = $app->objToArray($item);
                     $res = $this->blockview($block);

@@ -1,12 +1,12 @@
 <html>
 <view>
-    {{ html_entity_decode( {{freecode}} ) }}
+{{html_entity_decode({{freecode}})}}
 </view>
 <edit header="{{_lang.header}}">
     <div>
         <wb-module wb="module=yonger&mode=edit&block=common.inc" />
     </div>
-    <wb-module wb="module=codemirror&oconv=html_entity_decode" name="freecode"></wb-module>
+    <meta wb="module=codemirror" name="freecode">
     <wb-lang>
     [ru]
     header = "Произвольный код в body"
