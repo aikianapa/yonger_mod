@@ -99,7 +99,7 @@
             </div>
             <div class="modal-body p-0 pb-5 scroll-y">
             <div class="list-group" id="{{_form}}EditFormListBlocks">
-                <wb-foreach wb="ajax=/module/yonger/blocklist&render=client&bind=yonger.blocks">
+                <wb-foreach wb="from=_null&render=client&bind=yonger.blocks">
                     <a class="list-group-item list-group-item-action" href="javascript:void(0)" data-name="{{name}}"
                         onclick="yonger.yongerPageBlockAdd('{{id}}')">
                         <span>{{name}}</span>

@@ -44,6 +44,7 @@
                     <span class="dd-info col-sm-6">
                         <span class="row">
                             <span class="dd-path col-6 ellipsis" data-path="{{url}}">
+                                <img data-src="/module/myicons/link-big.svg?size=24&stroke=000000">
                                 {{url}}
                                 <span class="d-block d-sm-none tx-10 tx-muted">{{header}}</span>
                             </span>
@@ -92,10 +93,10 @@
 
         $('#yongerPagesTree').delegate('.dd-path',wbapp.evClick,function(e){
             e.stopPropagation();
-            let url = document.location.origin + $(this).text();
+            let url = document.location.origin + $(this).attr('data-path');
             let target = md5(url);
             window.open(url, target).focus();
-            e.stopPropogation();
+            e.stopPropagation();
         });
 
         $('#yongerPagesTree').delegate('.dd-active',wbapp.evClick,function(e){

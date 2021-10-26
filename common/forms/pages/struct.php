@@ -6,13 +6,12 @@
         <h5 class="order-1">Структура</h5>
 
         <div class="dropdown dropright order-2 d-block">
-            <div class="btn-group" role="group" aria-label="Basic example">
+            <div class="btn-group" role="group">
                 <a href="#" id="yongerPageBlockSeo" class="btn btn-sm btn-outline-secondary nobr"
                 wb-if="'{{_route.id}}' !== '_header' && '{{_route.id}}' !== '_footer'">{{_lang.seo}}</a>
                 <a href="#" id="yongerPageBlockCode" class="btn btn-sm btn-outline-secondary nobr"
                 wb-if="'{{_route.id}}' !== '_header' && '{{_route.id}}' !== '_footer'">{{_lang.code}}</a>
-                <a href="#" id="yongerPageBlockAdd" class="btn btn-sm btn-outline-secondary nobr"
-                    onclick="$('#modalPagesEditBlocks').modal('show');">
+                <a href="#" id="yongerPageBlockAdd" class="btn btn-sm btn-outline-secondary nobr">
                     Добавить блок
                 </a>
             </div>
@@ -94,6 +93,13 @@ yonger.pageBlocks = function() {
 
         }
     });
+
+    $('#modalPagesEdit').delegate('#yongerPageBlockAdd',wbapp.evClick,function(){
+        $('#modalPagesEditBlocks').modal('show');
+        wbapp.ajax({'url':'/module/yonger/blocklist'},function(data){
+            wbapp.storage('yonger.blocks', data.data);
+        })
+    })
 
 
     $blockform.undelegate(':input[name]:not(.wb-unsaved)', 'change');
