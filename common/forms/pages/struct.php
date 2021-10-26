@@ -56,7 +56,7 @@
 
 
 
-<script wb-app>
+<script wb-app remove>
 yonger.pageBlocks = function() {
     let $blockform = $('#yongerBlocksForm > form');
     let $blocks = $('#yongerPageBlocks [name=blocks]');
@@ -144,6 +144,9 @@ yonger.pageBlocks = function() {
             $blockform.html($(editor).html());
             wbapp.wbappScripts();
             wbapp.tplInit();
+            $blockform.delegate('[name=header]:first','change',function(){
+                wbapp.storage('yonger.page.blocks.' + id + '.header',$(this).val());
+            })
         });
 
         $('#yongerPageBlocks').data('current', id);
