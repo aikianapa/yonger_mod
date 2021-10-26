@@ -1,13 +1,19 @@
 <?php
     function customRoute($route = []) {
         $app = &$_ENV['app'];
+        $uri = $app->route->uri;
+        $path = explode('/', $uri);
+        $name = array_pop($path);
+        $uri == '/' && $name == '' ? $name = 'home' : null;
         $pages = $app->itemList('pages',['filter'=>[
-            "_site"=>$app->vars('_sett.site'),
-            "_login"=>$app->vars('_sett.login'),
-            "url" => $app->route->uri
+            '_site'=>$app->vars('_sett.site'),
+            '_login'=>$app->vars('_sett.login'),
+            'name'=>$name,
+            'active'=>'on',
+            'url' => $uri
         ]]);
         foreach($pages['list'] as $page) {
-            if ($page['url'] == $app->route->uri) {
+            if ($page['url'] == $uri) {
                 $app->route->controller = 'form';
                 $app->route->mode = 'show';
                 $app->route->table = 'pages';
@@ -49,6 +55,8 @@
         $app = &$_ENV['app'];
         $item['_site'] = $app->vars('_sett.site');
         $item['_login'] = $app->vars('_sett.login');
+        $item['url'] = $item['path'] . '/' . $item['name'];
+        $item['url'] == '/home' ? $item['url'] = '/' : null;
         return $item;
     }
 ?>

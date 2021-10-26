@@ -32,7 +32,7 @@ class modYonger
 
     public function workspace()
     {
-        $app = &$this->app;
+        $app = $this->app;
         $subdom = $app->route->subdomain;
         if ($subdom > '' && $app->vars('_post.token') > '' && $app->vars('_post.login') > '') {
             $tok = file_get_contents( $app->vars('_env.path_app').'/database/_token.json');
@@ -111,8 +111,8 @@ class modYonger
         isset($item['lang']) ? $data = array_merge($item,$item['lang'][$this->app->vars('_sess.lang')]) : $data = &$item;
         $result = (object)$res->attributes();
         $res->fetch($data); // не удалять, иначе слюстрока не работает как нужно... шайтанама! :(
+        $this->dom->app->vars('_sett.devmode') == 'on' ? $res->children()->prepend('<!-- Is block: '.$form.' -->') : null;
         $section = $this->dom->app->fromString('<html>'.$res->fetch($data)->inner().'</html>');
-        //$section->prepend('<!-- Form '.$form.' included -->');
         isset($item['block_id']) && $item['block_id'] ? $section->children()->children(':first-child')->attr('id',$item['block_id']) : null;
         isset($item['block_class']) && $item['block_class'] ? $section->children()->children(':first-child')->addClass($item['block_class']) : null;
         if ($section->find('head')) {
@@ -125,6 +125,33 @@ class modYonger
         }
         $result->result = $section;
         return $result;
+    }
+
+    private function copypage() {
+        header("Content-type: application/json; charset=utf-8");
+        $app = $this->app;
+        $item = $app->itemRead('pages',$app->vars('_post.item'));
+        if ($item) {
+            $item['_id'] = $app->newId();
+            $max = 30;
+            $flag = false;
+            while($flag == false AND $max > 0) {
+                $item['name'] == '' ? $item['name'] = 'home_copy' : $item['name'] = $item['name'].'_copy';
+                $check = $app->itemList('pages', ['filter'=>[
+                '_site'=>$app->vars('_sett.site'),
+                '_login'=>$app->vars('_sett.login'),
+                'name'=>$item['name'],
+                'path' => $item['path']
+                ]]);
+                intval($check['count']) == 0 ?  $flag = true : $max--;
+            }
+            if ($flag == false) {return '{"error":true}';}
+            $item['active'] = '';
+            $item = $app->itemSave('pages', $item);
+            return json_encode($item);
+        } else {
+            return '{"error":true}';
+        }
     }
 
 
